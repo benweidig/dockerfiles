@@ -8,8 +8,6 @@ The container will run as a custom user so you can match USERID/GROUPID for nice
 
 | Argument                 | Default | Description                                                |
 | -------------------------| ------- | ---------------------------------------------------------- |
-| USERID                   | 1000    | uid of user running nginx                                  |
-| GROUPID                  | 1000    | gid of user running nginx                                  |
 | NGINX_CONFIGURE_OPTIONS  | --with-ipv6 --with-pcre-jit --with-http_stub_status_module | ./configure options for building nginx |
 | NGINX_WORKER_PROCESSES   | 1       | Defines the number of CPU cores used                       |
 | NGINX_WORKER_CONNECTIONS | 1024    | Max number of simultaneous connections by a worker process |
