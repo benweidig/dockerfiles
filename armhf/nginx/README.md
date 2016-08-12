@@ -48,4 +48,4 @@ docker run \
 ## Todo
 
 Move the build args for nginx configuration to an entrypoint-script with environment variables
-for niceer configuration of existing containers
+for nicer configuration of existing containers
