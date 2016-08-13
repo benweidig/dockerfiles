@@ -1,16 +1,16 @@
-# Armhf Nginx
+# ARMHF/NGINX
 
-A simple Dockerfile for building a [nginx](https://www.nginx.org) container with some configuration points.
+A simple Dockerfile for building a [nginx](https://www.nginx.org) container with compile options.
 
-The container will run as a custom user so you can match USERID/GROUPID for nicer file-ownership in volumes.
+You can set some nginx options via environment variables at container start
+
 
 ## Build Arguments
 
-| Argument                 | Default | Description                                                |
-| -------------------------| ------- | ---------------------------------------------------------- |
-| NGINX_CONFIGURE_OPTIONS  | --with-ipv6 --with-pcre-jit --with-http_stub_status_module | ./configure options for building nginx |
-| NGINX_WORKER_PROCESSES   | 1       | Defines the number of CPU cores used                       |
-| NGINX_WORKER_CONNECTIONS | 1024    | Max number of simultaneous connections by a worker process |
+| Argument                 | Default                                                                           | Description                            |
+| -------------------------| --------------------------------------------------------------------------------- | -------------------------------------- |
+| NGINX_CONFIGURE_OPTIONS  | --with-ipv6 --with-http_ssl_module --with-pcre-jit --with-http_stub_status_module | ./configure options for building nginx |
+| -------------------------| --------------------------------------------------------------------------------- | -------------------------------------- |
 
 
 ## Exposed ports
@@ -21,6 +21,16 @@ The container will run as a custom user so you can match USERID/GROUPID for nice
 ## Volumes
 
 - /etc/nginx/sites-enabled
+
+
+## Configure at startup time
+
+You can set some options in the nginx.conf via environment variables:
+
+- NGINX_USER
+- NGINX_WORKER_PROCESSES
+- NGINX_WORKER_CONNECTIONS
+- NGINX_ERROR_LOG_LEVEL
 
 
 ## Run the container
@@ -42,10 +52,13 @@ docker run \
     -v ~/nginx/sites-enabled:/etc/nginx/sites-enabled \
     -v /etc/localtime:/etc/localtime:ro \
     -v /etc/timezone:/etc/timezone:ro \
+    -e NGINX_USER=root \
+    -e NGINX_WORKER_PROCESSES=2 \
+    -e NGINX_WORKER_CONNECTIONS=2048 \
     armhf/nginx
 ```
 
-## Todo
 
-Move the build args for nginx configuration to an entrypoint-script with environment variables
-for nicer configuration of existing containers
+## Logs
+
+The access and error log are linked to stdout/stderr.
