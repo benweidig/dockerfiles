@@ -9,7 +9,7 @@ The authorized keys file has to be provided!
 ## Build Arguments
 
 | Argument | Default | Description                      |
-| ------------------ | -------------------------------- |
+| -------- | ------- | -------------------------------- |
 | DATA     | /data   | Data Directory / Home Folder     |
 | USERID   | 1000    | uid of user you're connecting to |
 | GROUPID  | 1000    | gid of user you're connecting to |
