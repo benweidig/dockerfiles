@@ -10,7 +10,6 @@ You can set some nginx options via environment variables at container start
 | Argument                 | Default                                                                           | Description                            |
 | -------------------------| --------------------------------------------------------------------------------- | -------------------------------------- |
 | NGINX_CONFIGURE_OPTIONS  | --with-ipv6 --with-http_ssl_module --with-pcre-jit --with-http_stub_status_module | ./configure options for building nginx |
-| -------------------------| --------------------------------------------------------------------------------- | -------------------------------------- |
 
 
 ## Exposed ports
