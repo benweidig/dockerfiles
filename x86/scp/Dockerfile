@@ -8,23 +8,23 @@ MAINTAINER Benjamin Weidig <ben@netzgut.net>
 
 # UPDATE SYSTEM AND INSTALL REQUIRED PACKAGES
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y openssh-server rssh
+    && apt-get install --no-install-recommends -y \
+            openssh-server \
+            rssh
 
 # PREPARE USER
-ARG USERNAME=docker
-ARG HOME=/data
+ARG DATA=/data
 ARG USERID=1000
 ARG GROUPID=1000
 
 RUN addgroup --system \
              --gid=$GROUPID \
-             $USERNAME \
+             docker \
     && adduser --system \
                --uid=$USERID \
                --gid=$GROUPID \
-               --home $HOME \
-               --shell `which rssh` $USERNAME \
-    && mkdir -p $HOME
+               --home $DATA \
+               --shell `which rssh` docker
 
 # PREVENT LOGINS
 RUN mkdir /var/run/sshd
@@ -38,7 +38,7 @@ RUN sed -i 's/#AuthorizedKeysFile.*/AuthorizedKeysFile \/authorized_keys/' /etc/
 # ENABLE SCP IN RSSH
 RUN sed -i 's/#allowscp.*/allowscp/' /etc/rssh.conf
 
-VOLUME $HOME
+VOLUME $DATA
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
